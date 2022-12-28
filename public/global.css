@@ -24,6 +24,10 @@ p {
     padding: 0px;
 }
 
+.accent {
+    color: var(--aqua_a);
+}
+
 .flx-col {
     display: flex;
     flex-direction: column;
@@ -31,7 +35,6 @@ p {
     justify-content: flex-start; /*v*/
     align-items: flex-start; /*h*/
     width: 100%; 
-    height: 100vh;
 }
 
 .flx-row {

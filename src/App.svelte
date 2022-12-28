@@ -1,44 +1,6 @@
 <script>
 
     import MenuExample from "./examples/menu_example/MenuExample.svelte";
-    // import { sorry, search } from './examples/menuExample'
-
-    // let qty = 1000
-    // let subject = "Yermom"
-
-    // let searchParam = "some search parameter"
-    // let searchResults = { results: [ ] }
-    // $: { console.log( JSON.stringify( searchResults, null, 2 ) ) }
-
-    // let ops = [
-    //     { 
-    //         // the function or method to run on click
-    //         Op: sorry, 
-            
-    //         // an array of arguments... you can mix types... it's javascript...
-    //         Args: [ qty, subject ], 
-
-    //         // Shows up in the Menu options 
-    //         Label: "Sorry",
-
-    //         // Shows up when you hover on this Menu option 
-    //         Tip: "Takes an integer, and string; prints some apologies" 
-
-    //     },
-    //     { 
-    //         // Op can be an anonymous method to call an external function
-    //         Op:  ( ) => { searchResults = search( searchParam ) }, 
-
-    //         // our anonymous method takes no arguments but we need to supply an empty array
-    //         Args: [ ],  
-
-    //         // Shows up in the Menu options 
-    //         Label: "Search", 
-
-    //         // We don't need to supply a Tip 
-    //         //Tip: NO TIP!!! 
-    //     },
-    // ]
 
     export let something;    
     

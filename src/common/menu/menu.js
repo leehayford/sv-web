@@ -6,5 +6,4 @@ export class MenuOption {
         this.Label = label
         this.Tip = tip
         }
-
 }

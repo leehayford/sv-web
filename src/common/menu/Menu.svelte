@@ -1,56 +1,38 @@
 <script>
 
-    /* The Menu components takes:
-            bg: string ==> the name of a css class ( see /public/global.css )
-            ops: [ ]object  ==> array of menu option objects, 
-    */
+    /* The Menu components exoprts two variables. */
 
-    export let bg = 'bg-aqua'; 
-    /* set backgroung-color and hover behavior*/
-    /* 
-        .bg-aqua { background-color: var(--aqua_a); }
-        .bg-aqua:hover { background-color: var(--aqua); }
-    */ 
-    /* ( see ~/public/global.css ) */
+    export let bg = 'bg-accent'; 
+    /* The string name of a css class 
+            Defines the background-color and hover background-color
+            See ~/public/global.css 
+    */
 
     export let ops; 
-    /* 
-        [ 
-            {
-                Op: functionA
-                    // Provide ONLY the name of the function; 
-                            // NOT functionA( x, y, z )
-                    // Use anonymous functions to handle return values
-                            // ( ) => { reult = functionB( ) }
-
-                Args: [ int, string, object ], 
-                        // Mixing data types is OK in javascript... even though it feels wrong...
-                        // Provide an empty array when Op takes no arguments
-                
-                Label: "Click Me"
-                        // Labels are mandatory
-                        // Keep them <~ 20 characters
-                
-                Tip: "Details about the function..."
-                        // Where cryptic lables are ncessary,
-                        // Provide clarity with a Tip
-            },
-            {
-                Op: ( p ) => { reult = functionC( p ) },         
-                Args: [ "parameter" ],      
-                Label: "Tricky Stuff"
-            }   
-        ]  
-    */
-     
-
+    /* An array of options objects:  { Op, Args, Label, Tip }
+            
+        Op: --> The function to call when this menu options is clicked.
+            Provide ONLY the name of the function.
+                func NOT func( ) 
+            Use anonymous functions to handle return values.
+                ( ) => { x = func( ) } 
+            
+        Args: --> An array of arguments to be passed to Op. 
+            Mixing data types is OK...
+                [ 1000, "Yermom" ]
+            Pass an empty array when Op takes no arguments.
+                [ ]  
+            
+        Label: -->The name of this menu option.
+    
+        Tip: --> A hint displayed when users hover over this menu option.
+*/
 </script>
 
 <div class="exp">
     
     <div class="icon { bg }">
         <!-- <img src="/img/menu.svg" alt="menu icon" /> -->
-        <!-- <svg width="23" height="23" viewBox="0 0 6.0854165 6.0854168" version="1.1" id="menu_svg"> -->
         <svg width="1.8rem" height="1.8rem" viewBox="0 0 6 6" version="1.1" id="menu_svg">
             <g  transform="translate(0,-291)">
                 <path class="menu-svg"
@@ -105,9 +87,6 @@
         {/each}
     </div>
 
-    <!-- <?xml version="1.0" encoding="UTF-8" standalone="no"?> -->
-
-
 </div>
 
 <style>
@@ -124,7 +103,7 @@
         fill:var(--dark);
         fill-opacity:1;
         stroke:none;
-        stroke-width:7.0743742;
+        stroke-width:6;
         stroke-miterlimit:4;
         stroke-dasharray:none;
         stroke-opacity:1
@@ -133,12 +112,12 @@
         display: flex;
         flex-direction: column;
         position: relative;
-        border-radius: 13px;
+		cursor: pointer;
     }
     .exp:hover .ops {
         display: block;
-        left: 13px;
-        top: 15px;
+        left: 0.8rem;
+        top: 0.9rem;
         z-index: 1000;
     }
     .ops {

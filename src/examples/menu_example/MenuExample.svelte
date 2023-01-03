@@ -1,141 +1,121 @@
 
 <script>
 
-    /* Import the Menu component into our svelte component...*/
+    /* Code Formatting */
+    import Prism from 'prismjs'
+    // import { P, singleJS, singleHTML } from './inputTextExample' 
+    /* Code Formatting */
+
+    /* Import the Menu component...*/
     import Menu from "../../common/menu/Menu.svelte"
 
-    /* We  can use the MenuOption class to define our options... but we don't have to...*/
+    /* The MenuOption class may be used to define menu options */
     import { MenuOption } from "../../common/menu/menu"
+    /* Though it is not necessary, see OptionFour */
 
-    /* Example functions ... not required or recommended for use elsewhere...*/
-    import { sorry, search, boop, beep } from './menuExample'
-
+    // import InputTextArea from "../../common/input_text_area/InputTextArea.svelte";
     
-    /*******************************************/
-    /* OptionOne *****************************/
-    const OptionOne = new MenuOption ( 
+    /* Example functions ... not required or recommended for use elsewhere...*/
+    import { sorry, search, boop } from './menuExample'
 
-        sorry, 
-        // Op --> Provide ONLY the name of the function; 'sorry' NOT 'sorry( )' 
 
-        [ 1000, "Yermom" ],  
-        // Args --> Mixing data types is OK in javascript... even though it feels wrong... 
-
-        "Sorry", 
-        // Label -->  Where cryptic lables are ncessary... 
-
-        "Prints a heartfelt apology to the console." 
-        // Tip --> Provide some clarity with a Tip 
-
+    const reset = ( ) => { disp = intro }
+    // Op --> Provide ONLY the name of the function; 'reset' NOT 'reset( )'
+    // Args  ==> Pass an empty array when Op takes no arguments
+    // Label -->  Where cryptic lables are ncessary... 
+    // Tip --> Provide some clarity with a Tip
+    const OptionOne = new MenuOption (
+        reset,       
+        [ ],         
+        "Reset",     
+        "Show the original text."   
     )
 
-    let results
-    $: { // Watch 'search_results' and print it on change
-        if ( results != undefined ) { 
-            console.log( results ) 
-        } 
-    }  
-
-    /*******************************************/
-    /* OptionTwo *****************************/
+    // Op --> Use anonymous functions to handle return values
+    // Args --> Mixing data types is OK in javascript... even though it feels wrong...
     const OptionTwo = new MenuOption ( 
-        ( p ) => { results = search( p ) },  // Op --> Use anonymous functions to handle return values 
-        [ "parameter" ],                            // Args 
-        "Search Fake Database"              // Label 
-        // We need NOT provide a Tip
+        ( qty, subject ) => { disp = sorry( qty, subject ) },    
+        [ 1000, "Yermom" ],    
+        "Sorry",  
+        "Generates a heartfelt apology for you."   
     )
 
-    /*******************************************/
-    /* OptionThree ***************************/    
-    // const OptionThree = new MenuOption ( 
-    //     beep,    // Op
-    //     [ ],         // Args  ==> Pass an empty array when Op takes no arguments 
-    //     "Beep" // Label 
-    // ) 
-    const OptionThree = new MenuOption ( beep, [ ], "Beep" )
+    // We need NOT provide a Tip
+    let results 
+    const OptionThree = new MenuOption ( 
+        ( p ) => { results = search( p ) },  
+        [ "parameter" ],                            
+        "Search"                                      
+    )
 
-    /*******************************************/
-    /* OptionFour ****************************/
     // Define an option WITHOUT using the MenuOption object...
-    // const OptionFour = { 
-    //     Op: boop,   
-    //     Args: [ ],      
-    //     Label: "Boop" 
-    //     // Tipping remains optional 
-    // }
     const OptionFour = { Op: boop, Args: [ ], Label: "Boop" }
 
-    /*******************************************/
     /* Create an array of predefined options */
     let options = [  OptionOne,  OptionTwo, OptionThree, OptionFour ]
 
     /* or... 
         When fear and shame drive us to write code both: 
         SUPER TOIGHT, and SUPER HARD TO FOLLOW  */
-
-    /*******************************************/
-    /* Create an array of options on the fly */
+         
     let sum = 0, a = 3, b = 6, click = 0;
-    $: { if ( click > 0 ) { console.log( `Yup, ${ sum }` ) } } 
+    $: { if ( click > 0 ) { console.log( `Yup, ${ sum }` ); disp = `Yup, ${ sum }` } } 
+
+    /* Create an array of options on the fly */
     let ops = [ 
-        new MenuOption( ( x, y ) => { sum = x + y; click++; }, [ a, b ], `${ a } + ${ b }`, "Probably 9" ),
-        new MenuOption( ( x, y ) => { sum = y - x; click++; }, [ a, b ], `${ b } - ${ a }`, "Probably 3" ),
-        { Op: ( x, y ) => { sum = x * y; click++; }, Args: [ a, b ], Label: `${ a } * ${ b }`, Tip: "Probably 18" },
-        { Op: ( x, y ) => { sum = y / x; click++; }, Args: [ a, b ], Label: `${ a } * ${ b }`, Tip: "Probably 2" },
+        new MenuOption( ( x, y ) => { sum = x + y; click++; }, [ a, b ], `${ a } + ${ b } = ?`, "Probably 9" ),
+        new MenuOption( ( x, y ) => { sum = y - x; click++; }, [ a, b ], `${ b } - ${ a } = ?`, "Probably 3" ),
+        { Op: ( x, y ) => { sum = x * y; click++; }, Args: [ a, b ], Label: `${ a } * ${ b } = ?`, Tip: "Probably 18" },
+        { Op: ( x, y ) => { sum = y / x; click++; }, Args: [ a, b ], Label: `${ b } / ${a } = ?`, Tip: "Probably 2" },
     ]
-        
+
+
 </script>
 
-<div class="flx-col menu-example">
+<svelte:head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-solarizedlight.min.css" rel="stylesheet" />
+</svelte:head>
 
-    <h3 class="accent">Menu</h3>
+<div class="flx-col">
+
     <div class="flx-row">
     
-        <!-- The Menu components takes:
-            ops: an array of options objects { Op, Args, Label, Tip }, 
-            bg: the string name of a css class defining the background-color and hover  
-        -->
+        <div class="flx-col">
+
+            <h3 class="accent">Menu</h3>
+            <p>Component Source Code:<br>
+                <span class="fg-accent">~/src/common/menu</span>
+            </p>   
+
+            <br>
         
-        <!-- 
-            We can define the ops array as we pass it 
-            to the Menu component -->
-        <Menu 
-            bg='bg-pink' 
-            ops={ [ 
-                OptionOne, 
-                OptionTwo,
-                OptionThree,
-                OptionFour
-            ] } />
-    
-        <!-- 
-            We can pass a predefined array 'options' 
-            to the Menu component -->
-        <Menu 
-            bg='bg-purple' 
-            ops={ options } 
-            />
-    
-        <!-- 
-            We can shorten things if: 
-            -   the predefined array 'ops' has the same name 
-            as the destination in the Menu component 
-            -   and we don't care what color the menu is -->
-        <Menu { ops } />
-    
+            <!-- We can define the ops array as we pass it to the Menu component -->
+            <Menu bg='bg-pink' ops={ [ OptionOne, OptionTwo, OptionThree, OptionFour  ] } />
+        
+            <!-- We can pass a predefined array 'options' to the Menu component -->
+            <Menu bg='bg-purple'  ops={ options } />
+        
+            <!-- We can shorten things if the predefined array is called 'ops' as it is in the Menu component -->
+            <Menu { ops } />
+        
+
+
+            <p>Above are some examples of the 
+                <span class="fg-accent" style="font-style:oblique;"> Menu</span> component.
+            </p>
+            <p>Menu Usage Example Source Code ( this page ):<br>
+                <span class="fg-accent">~/src/examples/menu_example</span>
+            </p>     
+
+        </div>
+
+
     </div>
-    
-    <p>Above are some examples of the <span class="accent">Menu</span> component.</p>
-    <p>Menu Usage Example Source Code: <span class="accent">~/src/examples/menu_example</span></p>
-    <p>Menu Component Source Code: <span class="accent">~/src/common/menu</span></p>
 
 </div>
 
 <style>
-    .menu-example {
-        background-color: var(--light_aa);
-        padding: 1rem;
-    }
+
 </style>
 
 

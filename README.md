@@ -9,7 +9,7 @@ Navigate to the root of your project and clone this repo into a folder called 'w
 You could clone it elsewhere by changing 'web' to 'elsewhere' in the command above, 
 but I would chose somthing more meaningful; in fact I did...
 ```bash
-git clone https://leehayford/svelte/basic_template.git web
+git clone https://github.com/leehayford/sv-web.git web
 ```
 
 ### Install the dependencies

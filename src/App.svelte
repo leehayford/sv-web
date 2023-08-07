@@ -10,6 +10,8 @@
 
     import Button from "./common/button/Button.svelte";
 
+    import { auth_user } from './stores/auth'
+
     let showButtonExample = false
     let showInputTextExample = false
     let showInputTextAreaExample = false
@@ -29,11 +31,11 @@
 
 <main class="flx-col">
 
-    <HeaderExample title="Example App" subtitle="You can change all of this" >
+    <HeaderLoginExample title="Example App" subtitle="You can change all of this" >
         
         <!-- <HeaderLoginExample /> -->
 
-    </HeaderExample>
+    </HeaderLoginExample>
 
     <div class="flx-row" id="content">
 
@@ -49,12 +51,13 @@
 
         <div class="flx-col" id="right-pane">
 
-            { #if showButtonExample }<ButtonExample />
-            { :else if showInputTextExample }<InputTextExample />
-            { :else if showInputTextAreaExample }<InputTextAreaExample />
+            { JSON.stringify( $auth_user, null, 4 ) }
+            <!-- { #if showButtonExample }<ButtonExample /> -->
+            <!-- { :else if showInputTextExample }<InputTextExample /> -->
+            <!-- { :else if showInputTextAreaExample }<InputTextAreaExample /> -->
             <!-- { :else if showMenuExample }<MenuExample /> -->
 
-            { /if }
+            <!-- { /if } -->
 
         </div>
 
